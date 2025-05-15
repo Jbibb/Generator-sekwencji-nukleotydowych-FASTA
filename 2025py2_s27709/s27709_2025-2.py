@@ -53,6 +53,8 @@ class NCBIRetriever:
             return None
             
     def fetch_records(self, start=0, max_records=10):
+        #TODO
+        #add min and max length filter for retrieved sequences?
         """Fetch a batch of records using the stored search results."""
         if not hasattr(self, 'webenv') or not hasattr(self, 'query_key'):
             print("No search results to fetch. Run search_taxid() first.")
@@ -81,14 +83,34 @@ class NCBIRetriever:
             print(f"Error fetching records: {e}")
             return ""
 
+def generate_report():
+    return
+    #TODO
+    #numer akcesyjny - ACCESION w .gb
+    #długość sekwencji
+    #opis
+
+def show_line_graph():
+    return
+    #TODO
+    #plot
+    #x - 'numer akcesyjny?' - ACCESSION w .gb wart string, "JBNNIT000000000", "PV522817"
+    #y - sequence length - ORIGIN to jest sekwencja, ale w .gb jest tylko jedna?
+    
+
 def main():
+    #Określenie minimalnych i maksymalnych długości sekwencji
+    min_length = input("Enter minimal sequence length: ")
+    max_length = input("Enter maximum sequence length: ")
+    
+    
     # Uzyskaj dane uwierzytelniające
     email = input("Enter your email address for NCBI: ")
     api_key = input("Enter your NCBI API key: ")
     
     # Utwórz obiekt retriever
     retriever = NCBIRetriever(email, api_key)
- # Uzyskaj taxid od użytkownika
+    # Uzyskaj taxid od użytkownika
     taxid = input("Enter taxonomic ID (taxid) of the organism: ")
     
     # Szukaj rekordów
@@ -100,7 +122,7 @@ def main():
         
     # Pobierz kilka pierwszych rekordów jako próbkę
     print("\nFetching sample records...")
-    sample_records = retriever.fetch_records(start=0, max_records=5)
+    sample_records = retriever.fetch_records(start=0, max_records=100)
     
     # Zapisz do pliku
     output_file = f"taxid_{taxid}_sample.gb"
