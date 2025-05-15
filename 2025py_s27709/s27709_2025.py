@@ -1,5 +1,6 @@
 import random #importuje moduł wykorzystywany do wybierania losowych nukleotydów do sekwencji oraz pozycji wstawianego imienia
 import os #importuje moduł wykorzystywany do sprawdzenia czy nie istnieje plik o takiej samej nazwie
+import matplotlib.pyplot as plt #importuje moduł wykorzystywany do rysowania wykresu
 
 def generuj_sekwencje_fasta():
     """Generuje losową sekwencję DNA, zapisuje ją do pliku FASTA i wyświetla statystyki."""
@@ -87,6 +88,15 @@ def generuj_sekwencje_fasta():
     #print(f"Stosunek (C+G)/(A+T): {stosunek_cg_at:.2f}")
     #MODIFIED (Ponownie, zmiana na sposób wyrażania informacji jak w przykładzie w poleceniu.)
     print(f"%CG: {stosunek_cg_at:.2f}")
+    
+    #ORIGINAL
+    #MODIFIED (Rysowanie wykresu dla lepszej wizualizacji danych)
+    plt.title("Udział nukleotydów w sekwencji") #nazwa/nagłówek wykresu
+    plt.bar(nukleotydy, [procent_a, procent_c, procent_g, procent_t]) #określenie danych dla wykresu słupkowego (bar): etykiety (nukleotydy)i wartości zmiennych z procentami
+    plt.ylabel("Udział (%)") #etykieta osi y
+    plt.xlabel("Nukleotyd") #etykieta osi X
+    plt.show() #pokazuje wykres
+   
 
 if __name__ == "__main__": # w tym miejscu zaczyna się program. warunek sprawdza czy skrypt jest uruchamiony 'samodzielnie' jako program a nie część innego skryptu
     generuj_sekwencje_fasta() #wywołuje główną funkcję
